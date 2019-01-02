@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Svc name:</strong>
+  <%= @service.svc_name %>
+</p>
+
+<p>
+  <strong>Svc desc:</strong>
+  <%= @service.svc_desc %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back', services_path %>

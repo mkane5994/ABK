@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Customers</h1>
+
+<table class = "table blueTable table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Primary</th>
+      <th>Address</th>
+      <th>Zip Code</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.cus_f_name %> <%= customer.cus_l_name %></td>
+        <td><%= customer.cus_p_phone %></td>
+        <td><%= customer.cus_address %></td>
+        <td><%= customer.cus_zip %></td>
+        <td><%= customer.cus_email %></td>
+        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+<!--    This allows to hide and unhide an item on the table-->
+<!--   ADD THIS TO THE TR data-toggle="collapse" data-target="#accordion" class="clickable"-->
+<!--      <tr>-->
+<!--        <td colspan="2">-->
+<!--          <div id="accordion" class="collapse">Hidden by default</div>-->
+<!--        </td>-->
+<!--      </tr>-->
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer', new_customer_path %>

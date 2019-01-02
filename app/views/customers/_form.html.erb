@@ -1,0 +1,104 @@
+<%= simple_form_for @customer do |f| %>
+  <body>
+    <div class="name">
+      <%= f.input :cus_f_name, input_html: {class: 'form-control', id: 'first-field'}%>
+      <%= f.input :cus_l_name, input_html: {class: 'form-control', id: 'last-field'}%>
+    </div>
+
+    <div class="phone">
+      <%= f.input :cus_p_phone, input_html: {class: 'form-control phone-field', id: 'pri-field'}%>
+      <%= f.input :cus_a_phone, input_html: {class: 'form-control phone-field', id: 'alt-field'}%>
+    </div>
+
+    <div id="locationField">
+      <input id="autocomplete" placeholder="Enter your address"
+             onFocus="geolocate()" type="text"/>
+    </div>
+
+
+
+    <div id="form-inline form-group">
+
+      <table id="address">
+        <tr>
+          <td class="label">Street address</td>
+<!--                Default from Google-->
+<!--          <td class="slimField"><input class="field" id="street_number" disabled="true"/></td>-->
+<!--          <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"/></td>-->
+
+          <td class="slimField"><%= f.input :number, disabled: true, label: false,
+                                            input_html: {class: 'field', id: 'street_number'} %></td>
+          <td class="wideField" colspan="2"><%= f.input :route, disabled: true, label: false,
+                                                        input_html: {class: 'field', id: 'route'} %></td>
+        </tr>
+        <tr>
+          <td class="label">City</td>
+          <!-- Note: Selection of address components in this example is typical.
+               You may need to adjust it for the locations relevant to your app. See
+               https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+          -->
+          <td class="wideField" colspan="3"><%= f.input :cus_city, disabled: true, label: false,
+                                                        input_html: {class: 'field', id: 'locality'} %></td>
+        </tr>
+        <tr>
+<!--          <td class="label">State</td>-->
+<!--          <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"/></td>-->
+          <td class="label">State</td>
+          <td class="slimField"><%= f.input :cus_state, disabled: true, label: false,
+                                            input_html: {class: 'field', id: 'administrative_area_level_1'} %></td>
+
+          <td class="label">Zip code</td>
+          <td class="wideField"><%= f.input :cus_zip, disabled: true, label: false,
+                                            input_html: {class: 'field', id: 'postal_code'} %></td>
+         <tr>
+          <td class="label">Country</td>
+          <td class="wideField" colspan="3"><%= f.input :cus_ctry, disabled: true, label: false,
+                                                        input_html: {class: 'field', id: 'country'}%></td>
+        </tr>
+
+<!--        <input class="field" id="country" disabled="true"/>-->
+<!--        <tr>-->
+<!--          <td class="label">Country</td>-->
+<!--          <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"/></td>-->
+<!--        </tr>-->
+      </table>
+
+      <td class="label">lat</td>
+      <td class="wideField"><%= f.input :lat, disabled: true, label: false,
+                                        input_html: {class: 'field', id: 'latitude'}%></td>
+      <td class="label">long</td>
+      <td class="wideField"><%= f.input :long, disabled: true, label: false,
+                                        input_html: {class: 'field', id: 'longitude'}%></td>
+      <div id="map-canvas"></div>
+    </div>
+    <%= button_to 'Get Coords', :coords%>
+    <%= tag :div, class: 'location_results_list' %>
+    <div>
+<!--      create boxes for lat/long to get map location set up-->
+    </div>
+    <%= f.input :cus_email, input_html: {class: 'form-control', id: 'email-field'} %>
+    <%= f.input :cus_notes, as: :text, input_html: {class: 'form-control', id: 'notes-field'} %>
+    <%= f.button :submit, 'Save' %>
+
+
+
+<!--MASK SCRIPT (mask-script.js is unused until i can figure out how to apply a conditional script) this script is required to
+be run AFTER the HTML above is loaded. -->
+<script>
+    console.log($('.phone-field'));
+// Phone number mask
+    $('.phone-field').inputmask({
+        mask: '(999) 999-9999'
+    })
+
+// Zip Code Mask
+    $('.cus_zip').inputmask({
+        mask: '99999'
+    })
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-cQladninVyQdEjB6D-f7K5hncOE2EUI&libraries=places&callback=initAutocomplete"
+        async defer></script>
+  </body>
+<% end %>

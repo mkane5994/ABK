@@ -1,0 +1,77 @@
+<%= form_with(model: customer, local: true) do |form| %>
+  <% if customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<body class="cus_new">
+    <div class="name">
+      <div class="f_name">
+        <%= form.label "First Name" %>
+        <%= form.text_field :cus_f_name %>
+      </div>
+
+      <div class="l_name">
+        <%= form.label "Last Name" %>
+        <%= form.text_field :cus_l_name %>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="p_phone">
+        <%= form.label "Primary Phone" %>
+        <%= form.text_field :cus_p_phone %>
+      </div>
+
+      <div class="a_phone">
+        <%= form.label "Alternate Phone" %>
+        <%= form.text_field :cus_a_phone, data: {mask: '999-999-9999'} %>
+      </div>
+    </div>
+
+    <div class="cus_address">
+      <div class="street">
+        <%= form.label "Address" %><br>
+        <%= form.text_field :cus_address %>
+      </div>
+
+      <div class="zip">
+        <%= form.label "Zip Code" %><br>
+        <%= form.text_field :cus_zip, readonly: true %>
+      </div>
+
+      <div class="city">
+        <%= form.label "City" %><br>
+        <%= form.text_field :cus_city, readonly: true%>
+      </div>
+
+      <div class="state">
+        <%= form.label "State" %><br>
+        <%= form.text_field :cus_city, readonly: true%>
+      </div>
+
+    </div>
+
+    <div class="field"> <br>
+      <%= form.label "Email" %>
+      <%= form.text_field :cus_email, size: 50, placeholder: "example@example.com" %>
+    </div>
+
+    <div class="field"><br>
+      <%= form.label "Notes" %><br>
+      <%= form.text_area :cus_notes, cols: "50", rows: "10", placeholder: "Enter notes here" %>
+    </div>
+
+    <div class="actions"><br>
+      <%= form.submit %>
+    </div>
+  <% end %>
+</body>
+

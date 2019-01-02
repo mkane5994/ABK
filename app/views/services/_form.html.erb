@@ -1,0 +1,17 @@
+<%= form_with(model: service, local: true) do |form| %>
+
+
+  <div class="field">
+    <%= form.label :svc_name %>
+    <%= form.text_field :svc_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :svc_desc %>
+    <%= form.text_field :svc_desc %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
